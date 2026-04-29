@@ -4,6 +4,7 @@ import com.artisanops.bookstore.review.Review;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -17,8 +18,8 @@ public class Book {
     private String description;
 
     @JsonIgnore
-    @OneToMany
-    private List<Review> reviews;
+    @OneToMany(mappedBy = "book", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Review> reviews = new ArrayList<>();
 
     public List<Review> getReviews() {
         return reviews;
